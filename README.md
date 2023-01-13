@@ -22,7 +22,7 @@ You will run the file using node.js which will initiate the inquirer prompts. It
 
 ---
 ## Screen Capture
-
+https://app.castify.com/view/5563db11-51ff-4460-8374-4b62a3735506
 ---
 
 ## Questions
