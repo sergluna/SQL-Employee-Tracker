@@ -54,7 +54,7 @@ var employees = function () {
                     }
                 }
             }]).then((answers) => {
-                db.query(`INSERT INTO department (name) VALUES (?)`, [answers.department], (err, result) => {
+                db.query(`INSERT INTO department (names) VALUES (?)`, [answers.department], (err, result) => {
                     if (err) throw err;
                     console.log(`Added ${answers.department} to the database.`)
                     employees();
@@ -192,7 +192,7 @@ var employees = function () {
                         }
                     }
 
-                    db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)`, [answers.firstName, answers.lastName, role.id, answers.manager.id], (err, result) => {
+                    db.query(`INSERT INTO employee (first_name, last_name, roles_id, manager_id) VALUES (?, ?, ?, ?)`, [answers.firstName, answers.lastName, role.id, answers.manager.id], (err, result) => {
                         if (err) throw err;
                         console.log(`Added ${answers.firstName} ${answers.lastName} to the database.`)
                         employees();
