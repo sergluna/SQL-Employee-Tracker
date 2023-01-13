@@ -1,4 +1,4 @@
-// Variable Definitions & Dependencies
+
 const inquirer = require('inquirer');
 const db = require('./db/connection');
 
@@ -8,16 +8,16 @@ db.connect(err => {
     console.log('Database connected.');
     employees();
 });
-
+// Creates the inquirer prompt
 var employees = function () {
     inquirer.prompt([{
-        // Begin Command Line
+        // Begin Command Line, he first prompt
         type: 'list',
         name: 'prompt',
         message: 'What database do you want to view?',
         choices: ['View All Department', 'View All Roles', 'View All Employees', 'Add A Department', 'Add A Role', 'Add An Employee', 'Update An Employee Role', 'Log Out']
     }]).then((answers) => {
-        // Views the Department Table in the Database
+        // Views the Department Database
         if (answers.prompt === 'View All Department') {
             db.query(`SELECT * FROM department`, (err, result) => {
                 if (err) throw err;
@@ -41,7 +41,7 @@ var employees = function () {
             });
         } else if (answers.prompt === 'Add A Department') {
             inquirer.prompt([{
-                // Adding a Department
+                // Adding a new department
                 type: 'input',
                 name: 'department',
                 message: 'What is the name of the department you want to add?',
@@ -61,13 +61,13 @@ var employees = function () {
                 });
             })
         } else if (answers.prompt === 'Add A Role') {
-            // Beginning with the database so that we may acquire the departments for the choice
+            // Selecting which database to add a new role in
             db.query(`SELECT * FROM department`, (err, result) => {
                 if (err) throw err;
 
                 inquirer.prompt([
                     {
-                        // Adding A Role
+                        // Adding the new role
                         type: 'input',
                         name: 'role',
                         message: 'What is the name of the role you want to add?',
@@ -81,7 +81,7 @@ var employees = function () {
                         }
                     },
                     {
-                        // Adding the Salary
+                        // Adding the new salary
                         type: 'input',
                         name: 'salary',
                         message: 'What is the salary of the role being added?',
@@ -95,7 +95,7 @@ var employees = function () {
                         }
                     },
                     {
-                        // Department
+                        // Selecting which department this new role shoul be in
                         type: 'list',
                         name: 'department',
                         message: 'Which department does this role belong in?',
@@ -123,7 +123,7 @@ var employees = function () {
                 })
             });
         } else if (answers.prompt === 'Add An Employee') {
-            // Calling the database to acquire the roles and managers
+            // Selecting everything from employees database and their roles
             db.query(`SELECT * FROM employee, roles`, (err, result) => {
                 if (err) throw err;
 
